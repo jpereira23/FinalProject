@@ -1,8 +1,8 @@
 # Final Project for Android Development
 
 # Username and Password
-##Username: 
+## Username: 
 chico
 
-##Password: 
+## Password: 
 student
