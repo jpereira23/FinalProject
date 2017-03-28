@@ -55,56 +55,65 @@ public class MainGame extends AppCompatActivity {
         RealmQuery<Entity> query = realm.where(Entity.class);
         RealmResults<Entity> results = query.findAll();
 
-        String picFile; //file source for current student picture
+        if(results.size() >= 3) {
+            String picFile; //file source for current student picture
 
-        for (int i = 0; i < results.size(); i++) {
-            studentList.put(results.get(i).getName(), results.get(i).getPictureName());
-            listUnguessed.add(results.get(i).getName());
-            listComplete.add(results.get(i).getName());
+            for (int i = 0; i < results.size(); i++) {
+                if(results.get(i).getPictureName() != null) {
+                    studentList.put(results.get(i).getName(), results.get(i).getPictureName());
+                    listUnguessed.add(results.get(i).getName());
+                    listComplete.add(results.get(i).getName());
+                }
+
+
+            }
+
+            picture = (ImageView) findViewById(R.id.student_image);
+            button1 = (Button) findViewById(R.id.choice1);
+            button2 = (Button) findViewById(R.id.choice2);
+            button3 = (Button) findViewById(R.id.choice3);
+            final TextView numLeft = (TextView) findViewById(R.id.numLeft);
+            correct = (TextView) findViewById(R.id.correct);
+
+            nextPicture();
+
+            button1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    checkCorrect(button1.getText().toString());
+                    numLeft.setText(Integer.toString(listComplete.size() - listUnguessed.size()) + "/" + Integer.toString(listComplete.size()));
+                }
+            });
+
+            button2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    checkCorrect(button2.getText().toString());
+                    numLeft.setText(Integer.toString(listComplete.size() - listUnguessed.size()) + "/" + Integer.toString(listComplete.size()));
+
+                }
+            });
+
+            button3.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    checkCorrect(button3.getText().toString());
+                    numLeft.setText(Integer.toString(listComplete.size() - listUnguessed.size()) + "/" + Integer.toString(listComplete.size()));
+
+                }
+            });
+
+            android.view.ViewGroup.LayoutParams layout = picture.getLayoutParams();
+
+            layout.height = 1000;
+            picture.setLayoutParams(layout);
 
         }
+        else{
+            correct = (TextView) findViewById(R.id.correct);
 
-        picture = (ImageView) findViewById(R.id.student_image);
-        button1 = (Button) findViewById(R.id.choice1);
-        button2 = (Button) findViewById(R.id.choice2);
-        button3 = (Button) findViewById(R.id.choice3);
-        final TextView numLeft = (TextView) findViewById(R.id.numLeft);
-        correct = (TextView) findViewById(R.id.correct);
-
-        nextPicture();
-
-        button1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                checkCorrect(button1.getText().toString());
-                numLeft.setText(Integer.toString(listComplete.size() - listUnguessed.size() ) + "/" + Integer.toString(listComplete.size()));
-            }
-        });
-
-        button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                checkCorrect(button2.getText().toString());
-                numLeft.setText(Integer.toString(listComplete.size() - listUnguessed.size()) + "/" + Integer.toString(listComplete.size()));
-
-            }
-        });
-
-        button3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                checkCorrect(button3.getText().toString());
-                numLeft.setText(Integer.toString(listComplete.size() - listUnguessed.size()) + "/" + Integer.toString(listComplete.size()));
-
-            }
-        });
-
-        android.view.ViewGroup.LayoutParams layout = picture.getLayoutParams();
-
-        layout.height = 1000;
-        picture.setLayoutParams(layout);
-
-
+            correct.setText("need at least 3 students to play");
+        }
     }
 
     public String nextPicture() //gets the picutre of a unguessed student and sets the ImageView to it
