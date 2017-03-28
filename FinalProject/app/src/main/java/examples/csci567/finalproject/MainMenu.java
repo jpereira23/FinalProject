@@ -29,7 +29,18 @@ public class MainMenu extends AppCompatActivity {
                 launchUsers();
             }
         });
+
+        Button launchMainGame = (Button) findViewById(R.id.play_button);
+
+        launchMainGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                launchGame();
+            }
+        });
     }
+
+
 
     private void launchActivity()
     {
@@ -40,6 +51,12 @@ public class MainMenu extends AppCompatActivity {
     public void launchUsers()
     {
         Intent intent = new Intent(this, EditUsers.class);
+        startActivity(intent);
+    }
+
+    public void launchGame()
+    {
+        Intent intent = new Intent(this, MainGame.class);
         startActivity(intent);
     }
 }

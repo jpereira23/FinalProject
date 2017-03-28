@@ -20,6 +20,17 @@
         android:id="@+id/button3" />
 
     <Button
+        android:text="Play Game"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="155dp"
+
+        android:id="@+id/play_button" />
+
+
+    <Button
         android:text="Edit Users"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
