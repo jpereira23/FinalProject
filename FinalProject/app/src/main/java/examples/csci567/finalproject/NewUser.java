@@ -21,6 +21,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import java.util.Random;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -75,7 +76,12 @@ public class NewUser extends AppCompatActivity {
         Realm realm = Realm.getDefaultInstance();
         RealmQuery<Entity> query = realm.where(Entity.class);
         RealmResults<Entity> results = query.findAll();
-        count = results.size();
+        Random rand = new Random();
+        //This needs to be error checked when submitting this as an ID to the database
+        //Entities with duplicate ids break protocol
+
+        count = rand.nextInt(1000) + 1;
+
 
         imageView = (ImageView) findViewById(R.id.imageview);
         takePicture = (Button) findViewById(R.id.picture_button);
